@@ -1,5 +1,3 @@
-import sys
-import os
 import random
 import time
 
@@ -16,9 +14,7 @@ allastmove0 = "0"
 
 
 def init_board():
-    board = [['.', '.', '.'],
-             ['.', '.', '.'],
-             ['.', '.', '.']]
+    board = [[".", ".", "."], [".", ".", "."], [".", ".", "."]]
     return board
 
 
@@ -28,14 +24,16 @@ board = init_board()
 def get_move_ai_lastmove(board, allastmovex):
 
     list_coord = []
-    list10 =[[[0, 0], [0, 1], [0, 2]],
-    [[1, 0], [1, 1], [1, 2]],
-    [[2, 0], [2, 1], [2, 2]],
-    [[0, 0], [1, 0], [2, 0]],
-    [[0, 1], [1, 1], [2, 1]],
-    [[0, 2], [1, 2], [2, 2]],
-    [[0, 0], [1, 1], [2, 2]],
-    [[0, 2], [1, 1], [2, 0]]]
+    list10 = [
+        [[0, 0], [0, 1], [0, 2]],
+        [[1, 0], [1, 1], [1, 2]],
+        [[2, 0], [2, 1], [2, 2]],
+        [[0, 0], [1, 0], [2, 0]],
+        [[0, 1], [1, 1], [2, 1]],
+        [[0, 2], [1, 2], [2, 2]],
+        [[0, 0], [1, 1], [2, 2]],
+        [[0, 2], [1, 1], [2, 0]],
+    ]
 
     for lista in list10:
         counter = 0
@@ -44,105 +42,100 @@ def get_move_ai_lastmove(board, allastmovex):
                 counter += 1
         if counter == 2:
             for n in lista:
-                if board[n[0]][n[1]] == '.':
+                if board[n[0]][n[1]] == ".":
                     list_coord = n
-
-                
-
-
 
     game = True
     while game:
 
-        move= random.choice(lista_miscari_random)
+        move = random.choice(lista_miscari_random)
 
         for i in move:
             list_coord.append(int(i))
-        x= list_coord[0]
-        y= list_coord[1]
+        x = list_coord[0]
+        y = list_coord[1]
         if board[x][y] == ".":
-            game= False
+            game = False
 
     else:
-
-        move= []
+        move = []
 
     return tuple(list_coord)
 
 
 def get_move(board, player1):
 
-    list_coord= []
+    list_coord = []
 
-    keep_asking= True
+    keep_asking = True
 
-    while(keep_asking == True):
-        move= input(f"please player {player1} moove coord: ").upper()
-        if(move == "quit" or move == "QUIT"):
+    while keep_asking == True:
+        move = input(f"please player {player1} moove coord: ").upper()
+        if move == "quit" or move == "QUIT":
             break
-        while (move not in list2):
-            move= input("please select corect coord: ").upper()
-            if(move == "quit" or move == "QUIT"):
+        while move not in list2:
+            move = input("please select corect coord: ").upper()
+            if move == "quit" or move == "QUIT":
                 break
         else:
-            list_coord= []
+            list_coord = []
             for x in move:
 
-                if(x == "a" or x == "A"):
-                    x= 0
+                if x == "a" or x == "A":
+                    x = 0
                     list_coord.append(x)
 
-                elif(x == "b" or x == "B"):
-                    x= 1
+                elif x == "b" or x == "B":
+                    x = 1
                     list_coord.append(x)
-                elif (x == "c" or x == "C"):
-                    x= 2
+                elif x == "c" or x == "C":
+                    x = 2
                     list_coord.append(x)
                 else:
-                    list_coord.append(int(x)-1)
+                    list_coord.append(int(x) - 1)
 
-        if(board[list_coord[0]][list_coord[1]] == '.'):
-            keep_asking= False
+        if board[list_coord[0]][list_coord[1]] == ".":
+            keep_asking = False
         else:
-            move= ""
+            move = ""
 
     return tuple(list_coord)
 
 
 def get_move_ai(board, computer0):
 
-    list_coord= []
+    list_coord = []
 
-    keep_asking= True
+    keep_asking = True
 
-    while(keep_asking == True):
-        move= random.choice(list2)
-        list_coord= []
+    while keep_asking == True:
+        move = random.choice(list2)
+        list_coord = []
         for x in move:
 
-            if(x == "A"):
-                x= 0
+            if x == "A":
+                x = 0
                 list_coord.append(x)
 
-            elif(x == "B"):
-                x= 1
+            elif x == "B":
+                x = 1
                 list_coord.append(x)
-            elif (x == "C"):
-                x= 2
+            elif x == "C":
+                x = 2
                 list_coord.append(x)
             else:
-                list_coord.append(int(x)-1)
+                list_coord.append(int(x) - 1)
 
-        if(board[list_coord[0]][list_coord[1]] == '.'):
-            keep_asking= False
+        if board[list_coord[0]][list_coord[1]] == ".":
+            keep_asking = False
         else:
-            move= ""
+            move = ""
     return tuple(list_coord)
 
 
 def mark(board, player1, row, col):
 
-    board[row][col]= player1
+    board[row][col] = player1
 
     return board
 
@@ -177,40 +170,58 @@ def is_full(board):
 
 
 def print_board(board):
-    print("   1  " + "   2  "+"    3  ")
-    print("A  " + f"{board[0][0]} " + " |  " +
-          f"{board[0][1]}" + "  |   "+f"{board[0][2]}")
+    print("   1  " + "   2  " + "    3  ")
+    print(
+        "A  "
+        + f"{board[0][0]} "
+        + " |  "
+        + f"{board[0][1]}"
+        + "  |   "
+        + f"{board[0][2]}"
+    )
     print("------+-----+------")
-    print("B  " + f"{board[1][0]} " + " |  " +
-          f"{board[1][1]}" + "  |   "+f"{board[1][2]}")
+    print(
+        "B  "
+        + f"{board[1][0]} "
+        + " |  "
+        + f"{board[1][1]}"
+        + "  |   "
+        + f"{board[1][2]}"
+    )
     print("------+-----+------")
-    print("C  " + f"{board[2][0]} " + " |  " +
-          f"{board[2][1]}" + "  |   "+f"{board[2][2]}")
+    print(
+        "C  "
+        + f"{board[2][0]} "
+        + " |  "
+        + f"{board[2][1]}"
+        + "  |   "
+        + f"{board[2][2]}"
+    )
 
 
 def print_result(board):
 
-    if(has_won(board, player1) == False):
+    if has_won(board, player1) == False:
 
         print(f"player {player1} has won !")
         return False
-    elif(has_won(board, player2) == False):
+    elif has_won(board, player2) == False:
 
         print(f"player {player2} has won !")
         return False
-    elif(has_won(board, computerx) == False):
+    elif has_won(board, computerx) == False:
 
         print(f"player {computerx} has won !")
         return False
-    elif(has_won(board, computer0) == False):
+    elif has_won(board, computer0) == False:
 
         print(f"player {computer0} has won !")
         return False
-    elif(has_won(board, allastmovex) == False):
+    elif has_won(board, allastmovex) == False:
 
         print(f"player {allastmovex} has won !")
         return False
-    elif(has_won(board, allastmove0) == False):
+    elif has_won(board, allastmove0) == False:
 
         print(f"player {allastmove0} has won !")
         return False
@@ -223,167 +234,173 @@ def print_result(board):
 
 def tic_toe(x):
 
-    if(x == 1):
-        board=init_board()
-        i=0
+    if x == 1:
+        board = init_board()
+        i = 0
         while i < 15:
             print_board(board)
-            coord=get_move(board, player1)
-            row=coord[0]
-            col=coord[1]
+            coord = get_move(board, player1)
+            row = coord[0]
+            col = coord[1]
             mark(board, computerx, row, col)
-            i=i+1
-            if(print_result(board) == False):
+            i = i + 1
+            if print_result(board) == False:
                 print_board(board)
                 break
 
             print_board(board)
-            coord=get_move(board, player2)
-            row=coord[0]
-            col=coord[1]
+            coord = get_move(board, player2)
+            row = coord[0]
+            col = coord[1]
             mark(board, computer0, row, col)
-            i=i+1
-            if(print_result(board) == False):
+            i = i + 1
+            if print_result(board) == False:
                 print_board(board)
                 break
     elif x == 2:
-        board=init_board()
-        i=0
+        board = init_board()
+        i = 0
         while i < 15:
             print_board(board)
-            coord=get_move(board, player1)
-            row=coord[0]
-            col=coord[1]
+            coord = get_move(board, player1)
+            row = coord[0]
+            col = coord[1]
             mark(board, computerx, row, col)
-            i=i+1
+            i = i + 1
             time.sleep(2)
-            if(print_result(board) == False):
+            if print_result(board) == False:
                 print_board(board)
                 break
 
             print_board(board)
-            coord=get_move_ai(board, computer0)
-            row=coord[0]
-            col=coord[1]
+            coord = get_move_ai(board, computer0)
+            row = coord[0]
+            col = coord[1]
             mark(board, computer0, row, col)
-            i=i+1
-            if(print_result(board) == False):
+            i = i + 1
+            if print_result(board) == False:
                 print_board(board)
                 break
     elif x == 3:
-        board=init_board()
+        board = init_board()
 
-        i=0
+        i = 0
         while i < 15:
             print_board(board)
-            coord=get_move_ai(board, computerx)
-            row=coord[0]
-            col=coord[1]
+            coord = get_move_ai(board, computerx)
+            row = coord[0]
+            col = coord[1]
             mark(board, computerx, row, col)
-            i=i+1
-            if(print_result(board) == False):
+            i = i + 1
+            if print_result(board) == False:
                 print_board(board)
                 break
 
             time.sleep(2)
             print_board(board)
-            coord=get_move(board, player2)
-            row=coord[0]
-            col=coord[1]
+            coord = get_move(board, player2)
+            row = coord[0]
+            col = coord[1]
             mark(board, computer0, row, col)
-            i=i+1
+            i = i + 1
             time.sleep(2)
-            if(print_result(board) == False):
+            if print_result(board) == False:
                 print_board(board)
                 break
 
     elif x == 4:
-        board=init_board()
+        board = init_board()
 
-        i=0
+        i = 0
         while i < 15:
             print_board(board)
-            coord=get_move_ai(board, computerx)
-            row=coord[0]
-            col=coord[1]
+            coord = get_move_ai(board, computerx)
+            row = coord[0]
+            col = coord[1]
             mark(board, computerx, row, col)
-            i=i+1
-            if(print_result(board) == False):
+            i = i + 1
+            if print_result(board) == False:
                 print_board(board)
                 break
 
             time.sleep(2)
             print_board(board)
-            coord=get_move_ai(board, computer0)
-            row=coord[0]
-            col=coord[1]
+            coord = get_move_ai(board, computer0)
+            row = coord[0]
+            col = coord[1]
             mark(board, computer0, row, col)
-            i=i+1
+            i = i + 1
             time.sleep(2)
-            if(print_result(board) == False):
+            if print_result(board) == False:
                 print_board(board)
                 break
     elif x == 5:
-        board=init_board()
+        board = init_board()
 
-        i=0
+        i = 0
         while i < 15:
             print_board(board)
-            coord=get_move(board, player1)
-            row=coord[0]
-            col=coord[1]
+            coord = get_move(board, player1)
+            row = coord[0]
+            col = coord[1]
             mark(board, player1, row, col)
-            i=i+1
-            if(print_result(board) == False):
+            i = i + 1
+            if print_result(board) == False:
                 print_board(board)
                 break
 
             time.sleep(1)
             print_board(board)
-            coord=get_move_ai_lastmove(board, allastmovex)
-            row=coord[0]
-            col=coord[1]
+            coord = get_move_ai_lastmove(board, allastmovex)
+            row = coord[0]
+            col = coord[1]
             mark(board, allastmove0, row, col)
-            i=i+1
+            i = i + 1
             time.sleep(1)
-            if(print_result(board) == False):
+            if print_result(board) == False:
                 print_board(board)
                 break
     elif x == 6:
-        board=init_board()
+        board = init_board()
 
-        i=0
+        i = 0
         while i < 15:
             print_board(board)
-            coord=get_move_ai_lastmove(board, allastmove0)
-            row=coord[0]
-            col=coord[1]
+            coord = get_move_ai_lastmove(board, allastmove0)
+            row = coord[0]
+            col = coord[1]
             mark(board, computerx, row, col)
-            i=i+1
-            if(print_result(board) == False):
+            i = i + 1
+            if print_result(board) == False:
                 print_board(board)
                 break
 
             time.sleep(2)
             print_board(board)
-            coord=get_move(board, player2)
-            row=coord[0]
-            col=coord[1]
+            coord = get_move(board, player2)
+            row = coord[0]
+            col = coord[1]
             mark(board, player2, row, col)
-            i=i+1
+            i = i + 1
             time.sleep(2)
-            if(print_result(board) == False):
+            if print_result(board) == False:
                 print_board(board)
                 break
 
 
 def main_menu():
-    print("Game Mode :\n", "1. Player   Vs Player \n", '2. Player   Vs Al Bundy \n', "3. Al Bundy(easy) Vs Player \n", "4. Al Bundy Vs Al Bundy \n",
-          "5. Player vs Safe Al Bundy \n", "6. Al Bundy Safe vs Player ")
-    x=int(input("Select 1 , 2 , 3 , 4 ,5 or 6:  "))
+    print(
+        "Game Mode :\n",
+        "1. Player   Vs Player \n",
+        "2. Player   Vs Al Bundy \n",
+        "3. Al Bundy(easy) Vs Player \n",
+        "4. Al Bundy Vs Al Bundy \n",
+        "5. Player vs Safe Al Bundy \n",
+        "6. Al Bundy Safe vs Player ",
+    )
+    x = int(input("Select 1 , 2 , 3 , 4 ,5 or 6:  "))
     tic_toe(x)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main_menu()
-
